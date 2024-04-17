@@ -1,0 +1,11 @@
+Bigs-Be-Test:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    jdbc-url: url
+    username: username
+    password: password
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+

@@ -1,0 +1,8 @@
+spring.application.name: Api
+spring:
+  profiles:
+    active: local
+
+  config:
+    import:
+      - mysql-db.yml
