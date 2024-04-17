@@ -6,7 +6,7 @@ import bigs.bigsbetest.domains.dto.WeatherDomainDto
 import org.springframework.stereotype.Repository
 
 /**
- *  Domain Module Repository Interface 구현체 [mysql, JPA 사용 모듈]
+ *  Domain Module - WeatherRepository Interface 구현체
  */
 
 @Repository
@@ -15,7 +15,7 @@ internal class WeatherEntityRepository(
 ) : WeatherRepository {
 
     /**
-     *  Dto -> Entity for Insert
+     *  Domain Dto -> Entity, for Insert
      */
     override fun saveWeather(dto: WeatherDomainDto) {
         weatherJpaRepository.save(WeatherEntity(
@@ -35,17 +35,20 @@ internal class WeatherEntityRepository(
     }
 
     /**
-     *  Entity List Data -> Domain List Data for
+     *  Entity List  -> Domain List
      */
-    override fun findWeather(nx: Int, ny: Int): List<Weather> {
-        var data = weatherJpaRepository.findByNxAndNy(nx, ny)
-        val weatherList = mutableListOf<Weather>()
+    override fun findWeatherAtRegion(nx: Int, ny: Int): List<Weather> {
 
-        for (entity in data) {
-            val weather = entity.toWeather()
-            weatherList.add(weather)
+        var resultEntity_findWeathers_atRegion = weatherJpaRepository.findByNxAndNy(nx, ny)
+
+        val resultDomain_findWeathers_atRegion = mutableListOf<Weather>()
+
+        for (entity in resultEntity_findWeathers_atRegion) {
+            val domain_weather = entity.toDomain()
+            resultDomain_findWeathers_atRegion.add(domain_weather)
         }
-        return weatherList;
+
+        return resultDomain_findWeathers_atRegion;
     }
 
 }

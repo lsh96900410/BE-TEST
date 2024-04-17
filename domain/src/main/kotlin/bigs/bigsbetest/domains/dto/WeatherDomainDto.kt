@@ -1,7 +1,7 @@
 package bigs.bigsbetest.domains.dto
 
 /**
- *  JSON Response Api Deserialization DTO -> Database Domain Required DTO
+ *  예보 응답 Api Deserialization DTO -> Database, Domain Required DTO
  */
 
 data class WeatherDomainDto (
@@ -19,8 +19,9 @@ data class WeatherDomainDto (
     var vec : String ?=null,
     var list : List<ForecastApiResponseDto> ?=null
 ){
-    constructor(weatherList: List<ForecastApiResponseDto>) : this(list = weatherList)
+    constructor(forecastApi_responseDatas: List<ForecastApiResponseDto>) : this(list = forecastApi_responseDatas)
 
+    // it : List<ForecastApiResponseDto>
     init {
         list?.let {
             this.nx= it.firstOrNull()?.nx
@@ -28,7 +29,12 @@ data class WeatherDomainDto (
             this.baseDate=it.firstOrNull()?.baseDate
             this.baseTime=it.firstOrNull()?.baseTime
 
+            /**
+             * category : 강수, 온도, 습도, 하늘 상태 etc
+             * obsrVlaue : 카테고리 별 데이터
+             */
             for (weatherData in it) {
+
                 when (weatherData.category) {
                     "PTY" -> this.pty = weatherData.obsrValue
                     "RN1" -> this.rn1 = weatherData.obsrValue
@@ -40,9 +46,6 @@ data class WeatherDomainDto (
                     "VEC" -> this.vec = weatherData.obsrValue
                 }
             }
-
         }
     }
-
-
 }

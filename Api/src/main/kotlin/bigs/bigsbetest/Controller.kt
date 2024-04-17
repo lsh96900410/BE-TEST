@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam
 @RequestMapping("/bigs")
 class Controller(
     private val service: Service,
-     private val weatherService: WeatherService
+    private val weatherService: WeatherService
 ) {
 
     /**
@@ -25,10 +25,10 @@ class Controller(
     @GetMapping
     fun findForecast() : ResponseEntity<Any>  {
 
-        var result = weatherService.find(60,130)
+        var result_findWeather = weatherService.findWeatherAtRegion(60,130)
 
-        return if(result.isNotEmpty()){
-            ResponseEntity.status(HttpStatus.OK).body(result)
+        return if(result_findWeather.isNotEmpty()){
+            ResponseEntity.status(HttpStatus.OK).body(result_findWeather)
         }else{
             ResponseEntity.noContent().build()
         }
@@ -41,8 +41,10 @@ class Controller(
      */
     @PostMapping
     fun saveForecast() {
-        var response : List<ForecastApiResponseDto> = service.forecastFind();
-        val weatherDomainDto = WeatherDomainDto(response)
+        var result_fetch_forecastApi : List<ForecastApiResponseDto> = service.forecastFind();
+
+        val weatherDomainDto = WeatherDomainDto(result_fetch_forecastApi)
+
         weatherService.save(weatherDomainDto);
     }
 

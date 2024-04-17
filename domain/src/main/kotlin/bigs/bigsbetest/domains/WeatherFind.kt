@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component
 class WeatherFind (
     private val weatherRepository: WeatherRepository
 ) {
-    fun find(nx : Int, ny : Int) : List<Weather>{
-       return  weatherRepository.findWeather(nx,ny)
+
+    fun findWeathersAtRegion(nx : Int, ny : Int) : List<Weather>{
+       return  weatherRepository.findWeatherAtRegion(nx,ny)
     }
+
 }

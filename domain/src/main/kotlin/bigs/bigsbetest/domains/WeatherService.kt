@@ -14,7 +14,7 @@ class WeatherService (
         return weatherApiSave.save(weatherDomainDto)
     }
 
-    fun find(nx : Int, ny : Int) : List<Weather>{
-        return weatherFind.find(nx,ny)
+    fun findWeatherAtRegion(nx : Int, ny : Int) : List<Weather>{
+        return weatherFind.findWeathersAtRegion(nx,ny)
     }
 }
