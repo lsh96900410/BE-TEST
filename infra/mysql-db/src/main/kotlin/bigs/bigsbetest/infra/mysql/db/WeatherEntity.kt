@@ -32,7 +32,7 @@ internal class WeatherEntity (
     /**
      *  Entity -> Domain
      */
-    fun toWeather(): Weather {
+    fun toDomain(): Weather {
         val weather = Weather()
         weather.nx = this.nx
         weather.ny = this.ny
