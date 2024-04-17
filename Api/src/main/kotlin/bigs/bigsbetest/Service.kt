@@ -37,7 +37,7 @@ class Service () {
         requestUri.append(("&" + URLEncoder.encode("base_time", "UTF-8")).toString() + "=" + URLEncoder.encode("0500", "UTF-8"))
         requestUri.append(("&" + URLEncoder.encode("nx", "UTF-8")).toString() + "=" + URLEncoder.encode("60", "UTF-8"))
         requestUri.append(("&" + URLEncoder.encode("ny", "UTF-8")).toString() + "=" + URLEncoder.encode("130", "UTF-8"))
-            .toString()
+
 
 
         /**
