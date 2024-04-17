@@ -27,17 +27,17 @@ class Service () {
         restTemplate.messageConverters.add(MappingJackson2HttpMessageConverter());
         var serviceKey : String ="서비스키"
 
-        val urlBuilder =
+        val requestUri =
             StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst")
-        urlBuilder.append(("?" + URLEncoder.encode("serviceKey", "UTF-8")).toString()+"="+ serviceKey)
-        urlBuilder.append(("&" + URLEncoder.encode("pageNo", "UTF-8")).toString() + "=" + URLEncoder.encode("1", "UTF-8"))
-        urlBuilder.append(("&" + URLEncoder.encode("numOfRows", "UTF-8")).toString() + "=" + URLEncoder.encode("1000", "UTF-8"))
-        urlBuilder.append(("&" + URLEncoder.encode("dataType", "UTF-8")).toString() + "=" + URLEncoder.encode("JSON", "UTF-8"))
-        urlBuilder.append(("&" + URLEncoder.encode("base_date", "UTF-8")).toString() + "=" + URLEncoder.encode("20240417", "UTF-8"))
-        urlBuilder.append(("&" + URLEncoder.encode("base_time", "UTF-8")).toString() + "=" + URLEncoder.encode("0800", "UTF-8"))
-        urlBuilder.append(("&" + URLEncoder.encode("nx", "UTF-8")).toString() + "=" + URLEncoder.encode("60", "UTF-8"))
-        urlBuilder.append(("&" + URLEncoder.encode("ny", "UTF-8")).toString() + "=" + URLEncoder.encode("130", "UTF-8"))
-        val url: URL = URL(urlBuilder.toString())
+        requestUri.append(("?" + URLEncoder.encode("serviceKey", "UTF-8")).toString()+"="+ serviceKey)
+        requestUri.append(("&" + URLEncoder.encode("pageNo", "UTF-8")).toString() + "=" + URLEncoder.encode("1", "UTF-8"))
+        requestUri.append(("&" + URLEncoder.encode("numOfRows", "UTF-8")).toString() + "=" + URLEncoder.encode("1000", "UTF-8"))
+        requestUri.append(("&" + URLEncoder.encode("dataType", "UTF-8")).toString() + "=" + URLEncoder.encode("JSON", "UTF-8"))
+        requestUri.append(("&" + URLEncoder.encode("base_date", "UTF-8")).toString() + "=" + URLEncoder.encode("20240417", "UTF-8"))
+        requestUri.append(("&" + URLEncoder.encode("base_time", "UTF-8")).toString() + "=" + URLEncoder.encode("0500", "UTF-8"))
+        requestUri.append(("&" + URLEncoder.encode("nx", "UTF-8")).toString() + "=" + URLEncoder.encode("60", "UTF-8"))
+        requestUri.append(("&" + URLEncoder.encode("ny", "UTF-8")).toString() + "=" + URLEncoder.encode("130", "UTF-8"))
+            .toString()
 
 
         /**
@@ -45,7 +45,7 @@ class Service () {
          */
 
         val objectMapper = ObjectMapper()
-        val responseEntity: ResponseEntity<String> = restTemplate.getForEntity(url.toString(), String::class.java)
+        val responseEntity: ResponseEntity<String> = restTemplate.getForEntity(requestUri.toString(), String::class.java)
         val responseBody: String = responseEntity.body ?:""
 
         val responseJsonDatas = objectMapper.readTree(responseBody)
